@@ -1,0 +1,396 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Mi Portfolio - Inicio">
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Bienvenido al Portfolio de Javier R.</h1>
+        <p class="subtitle">Desarrollador Frontend Junior</p>
+        <div class="cta-buttons">
+          <a href="/about" class="btn primary">Sobre mí</a>
+          <a href="/projects" class="btn secondary">Ver proyectos</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills">
+      <div class="container">
+        <h2>Mis habilidades</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3>Frontend</h3>
+            <ul>
+              <li>HTML5 & CSS3</li>
+              <li>JavaScript</li>
+              <li>React</li>
+              <li>Astro</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3>Backend</h3>
+            <ul>
+              <li>Node.js</li>
+              <li>Express</li>
+              <li>MongoDB</li>
+              <li>API REST</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3>Herramientas</h3>
+            <ul>
+              <li>Git & GitHub</li>
+              <li>VS Code</li>
+              <li>Vercel & Render</li>
+              <li>Figma</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="featured-projects">
+      <div class="container">
+        <h2>Proyectos Destacados</h2>
+        <p class="section-subtitle">Algunos de mis trabajos más recientes</p>
+        
+        <div class="projects-grid">
+          <div class="project-item">
+            <div class="project-image">
+              <img src="/calculator.svg" alt="Calculadora" />
+            </div>
+            <div class="project-info">
+              <h3>Calculadora Simple</h3>
+              <p>Una calculadora interactiva desarrollada con HTML, CSS y JavaScript.</p>
+              <a href="/proyectos/calculadora" class="btn small">Ver proyecto</a>
+            </div>
+          </div>
+          
+          <div class="project-item">
+            <div class="project-image">
+              <img src="/todolist.svg" alt="Lista de Tareas" />
+            </div>
+            <div class="project-info">
+              <h3>Lista de Tareas</h3>
+              <p>Una aplicación para gestionar tus tareas diarias con almacenamiento local.</p>
+              <a href="/proyectos/todolist" class="btn small">Ver proyecto</a>
+            </div>
+          </div>
+          
+          <div class="project-item">
+            <div class="project-image">
+              <img src="/dashboard.svg" alt="Dashboard" />
+            </div>
+            <div class="project-info">
+              <h3>Dashboard Interactivo</h3>
+              <p>Un dashboard con visualizaciones de datos utilizando gráficos y estadísticas.</p>
+              <a href="/proyectos/dashboard" class="btn small">Ver proyecto</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="view-all">
+          <a href="/projects" class="btn secondary">Ver todos los proyectos</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact">
+      <div class="container">
+        <h2>Contacto</h2>
+        <p class="section-subtitle">¿Tienes un proyecto en mente? ¡Hablemos!</p>
+        
+        <div class="contact-grid">
+          <div class="contact-info">
+            <div class="contact-item">
+              <h3>Email</h3>
+              <p>Javier R. - jrlmoh@gmail.com</p>
+            </div>
+            <div class="contact-item">
+              <h3>Redes Sociales</h3>
+              <div class="social-links">
+                <a href="#" class="social-link">LinkedIn</a>
+                <a href="#" class="social-link">GitHub</a>
+               
+              </div>
+            </div>
+            <div class="contact-item">
+              <h3>Ubicación</h3>
+              <p>Mataró, España</p>
+            </div>
+          </div>
+          
+          <div class="contact-form">
+            <h3>Envíame un mensaje</h3>
+            <form id="contact-form" action="https://formspree.io/f/mkgrepoj" method="POST">
+              <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="jrlmoh@gmail.com" required>
+              </div>
+              <div class="form-group">
+                <label for="message">Mensaje</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn primary">Enviar mensaje</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .hero {
+    background-color: #1e293b;
+    color: white;
+    padding: 6rem 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+
+  .primary:hover {
+    background-color: #2563eb;
+  }
+
+  .secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .skills {
+    padding: 4rem 0;
+    background-color: #f8fafc;
+  }
+
+  .skills h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #1e293b;
+    font-size: 2rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .skill-card {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .skill-card h3 {
+    color: #3b82f6;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .skill-card ul {
+    padding-left: 1.5rem;
+  }
+
+  .skill-card li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Estilos de proyectos destacados */
+  .featured-projects {
+    padding: 4rem 0;
+    background-color: white;
+  }
+
+  .featured-projects h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #1e293b;
+    font-size: 2rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .project-item {
+    background-color: #f8fafc;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .project-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .project-image {
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-info {
+    padding: 1.5rem;
+  }
+
+  .project-info h3 {
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  .project-info p {
+    color: #64748b;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .btn.small {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .view-all {
+    text-align: center;
+  }
+
+  /* Estilos de contacto */
+  .contact {
+    padding: 4rem 0;
+    background-color: #f8fafc;
+  }
+
+  .contact h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #1e293b;
+    font-size: 2rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .contact-item {
+    margin-bottom: 2rem;
+  }
+
+  .contact-item h3 {
+    color: #3b82f6;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-link {
+    color: #1e293b;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .social-link:hover {
+    color: #3b82f6;
+  }
+
+  .contact-form h3 {
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-family: inherit;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+</style>
+
+<script>
+  // El formulario ahora se maneja a través de Formspree
+  // No necesitamos JavaScript adicional para el envío
+  // Formspree se encargará de procesar el formulario y redirigir al usuario
+</script>

@@ -1,0 +1,10 @@
+<svg width="120" height="50" viewBox="0 0 120 50" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo redondeado -->
+  <rect width="120" height="50" rx="10" fill="#1e293b" />
+  
+  <!-- Texto J.R -->
+  <text x="60" y="33" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">J.R</text>
+  
+  <!-- Punto decorativo -->
+  <circle cx="60" cy="40" r="2" fill="#64748b" />
+</svg>

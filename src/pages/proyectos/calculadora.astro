@@ -1,0 +1,292 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Calculadora - Mi Portfolio">
+  <main>
+    <section class="calculator-hero">
+      <div class="container">
+        <h1>Calculadora Simple</h1>
+        <p class="subtitle">Un proyecto interactivo desarrollado con HTML, CSS y JavaScript</p>
+      </div>
+    </section>
+
+    <section class="calculator-content">
+      <div class="container">
+        <div class="calculator-description">
+          <p>Esta calculadora es un ejemplo de una aplicación web interactiva simple. Permite realizar operaciones básicas como suma, resta, multiplicación y división.</p>
+          <p>Puedes interactuar directamente con ella a continuación:</p>
+        </div>
+
+        <!-- Calculadora interactiva -->
+        <div class="calculator">
+          <div class="calculator-display" id="display">0</div>
+          <div class="calculator-keys">
+            <button class="key-operator" data-action="add">+</button>
+            <button class="key-operator" data-action="subtract">-</button>
+            <button class="key-operator" data-action="multiply">×</button>
+            <button class="key-operator" data-action="divide">÷</button>
+            
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            
+            <button>0</button>
+            <button data-action="decimal">.</button>
+            <button data-action="clear">AC</button>
+            
+            <button class="key-equal" data-action="calculate">=</button>
+          </div>
+        </div>
+
+        <div class="calculator-details">
+          <h2>Detalles técnicos</h2>
+          <p>Esta calculadora fue desarrollada utilizando:</p>
+          <ul>
+            <li>HTML5 para la estructura</li>
+            <li>CSS3 para el diseño y estilo</li>
+            <li>JavaScript para la funcionalidad interactiva</li>
+          </ul>
+          <p>El código está organizado siguiendo buenas prácticas de desarrollo web y es completamente responsive.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  // Lógica de la calculadora
+  document.addEventListener('DOMContentLoaded', () => {
+    const calculator = {
+      displayValue: '0',
+      firstOperand: null,
+      waitingForSecondOperand: false,
+      operator: null,
+    };
+
+    function updateDisplay() {
+      const display = document.getElementById('display');
+      display.textContent = calculator.displayValue;
+    }
+
+    function inputDigit(digit) {
+      const { displayValue, waitingForSecondOperand } = calculator;
+
+      if (waitingForSecondOperand === true) {
+        calculator.displayValue = digit;
+        calculator.waitingForSecondOperand = false;
+      } else {
+        calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+      }
+    }
+
+    function inputDecimal(dot) {
+      if (calculator.waitingForSecondOperand === true) {
+        calculator.displayValue = '0.';
+        calculator.waitingForSecondOperand = false;
+        return;
+      }
+
+      if (!calculator.displayValue.includes(dot)) {
+        calculator.displayValue += dot;
+      }
+    }
+
+    function handleOperator(nextOperator) {
+      const { firstOperand, displayValue, operator } = calculator;
+      const inputValue = parseFloat(displayValue);
+
+      if (operator && calculator.waitingForSecondOperand) {
+        calculator.operator = nextOperator;
+        return;
+      }
+
+      if (firstOperand === null && !isNaN(inputValue)) {
+        calculator.firstOperand = inputValue;
+      } else if (operator) {
+        const result = calculate(firstOperand, inputValue, operator);
+
+        calculator.displayValue = `${parseFloat(result.toFixed(7))}`;
+        calculator.firstOperand = result;
+      }
+
+      calculator.waitingForSecondOperand = true;
+      calculator.operator = nextOperator;
+    }
+
+    function calculate(firstOperand, secondOperand, operator) {
+      if (operator === '+') {
+        return firstOperand + secondOperand;
+      } else if (operator === '-') {
+        return firstOperand - secondOperand;
+      } else if (operator === '×') {
+        return firstOperand * secondOperand;
+      } else if (operator === '÷') {
+        return firstOperand / secondOperand;
+      }
+
+      return secondOperand;
+    }
+
+    function resetCalculator() {
+      calculator.displayValue = '0';
+      calculator.firstOperand = null;
+      calculator.waitingForSecondOperand = false;
+      calculator.operator = null;
+    }
+
+    const keys = document.querySelector('.calculator-keys');
+    keys.addEventListener('click', (event) => {
+      const { target } = event;
+      if (!target.matches('button')) {
+        return;
+      }
+
+      if (target.classList.contains('key-operator')) {
+        handleOperator(target.textContent);
+        updateDisplay();
+        return;
+      }
+
+      if (target.classList.contains('key-equal')) {
+        handleOperator('=');
+        updateDisplay();
+        return;
+      }
+
+      if (target.dataset.action === 'decimal') {
+        inputDecimal('.');
+        updateDisplay();
+        return;
+      }
+
+      if (target.dataset.action === 'clear') {
+        resetCalculator();
+        updateDisplay();
+        return;
+      }
+
+      inputDigit(target.textContent);
+      updateDisplay();
+    });
+  });
+</script>
+
+<style>
+  .calculator-hero {
+    background-color: #1e293b;
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .calculator-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .calculator-content {
+    padding: 4rem 0;
+  }
+
+  .calculator-description {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .calculator-details {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    padding: 2rem;
+    background-color: #f8fafc;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .calculator-details h2 {
+    color: #1e293b;
+    margin-bottom: 1rem;
+  }
+
+  .calculator-details ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .calculator-details li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Estilos de la calculadora */
+  .calculator {
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+    background-color: #22252D;
+    overflow: hidden;
+  }
+
+  .calculator-display {
+    background-color: #22252D;
+    color: white;
+    text-align: right;
+    font-size: 2.5rem;
+    padding: 1.5rem 1rem;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .calculator-keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1px;
+    background-color: #292D36;
+    padding: 0.5rem;
+  }
+
+  .calculator-keys button {
+    border: none;
+    background-color: #292D36;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .calculator-keys button:hover {
+    background-color: #373b44;
+  }
+
+  .key-operator {
+    color: #26FED7 !important;
+  }
+
+  .key-equal {
+    grid-column: -2;
+    grid-row: 2 / span 4;
+    background-color: #4B5EFC !important;
+    height: 100%;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+</style>

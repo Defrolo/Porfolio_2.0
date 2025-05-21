@@ -1,0 +1,394 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Mi Portfolio - Proyectos">
+  <main>
+    <section class="projects-hero">
+      <div class="container">
+        <h1>Mis Proyectos</h1>
+        <p class="subtitle">Explora algunos de mis trabajos más destacados</p>
+      </div>
+    </section>
+
+    <section class="projects-content">
+      <div class="container">
+        <!-- Proyecto 1: Calculadora Simple -->
+        <div class="project-card">
+          <h2>Calculadora Simple</h2>
+          <p class="project-description">Una calculadora interactiva desarrollada con HTML, CSS y JavaScript, integrada directamente en mi portfolio.</p>
+          
+          <div class="project-preview">
+            <img src="/calculator.svg" alt="Vista previa de la calculadora" class="preview-image">
+          </div>
+          
+          <div class="project-links">
+            <a href="/proyectos/calculadora" class="btn primary">Ver Calculadora</a>
+          </div>
+        </div>
+
+        <!-- Proyecto 2: Lista de Tareas -->
+        <div class="project-card">
+          <h2>Lista de Tareas</h2>
+          <p class="project-description">Una aplicación interactiva para gestionar tus tareas diarias, con funcionalidades para añadir, completar y eliminar tareas.</p>
+          
+          <div class="project-preview">
+            <img src="/todolist.svg" alt="Vista previa de la lista de tareas" class="preview-image">
+          </div>
+          
+          <div class="project-features">
+            <h3>Características principales:</h3>
+            <ul>
+              <li>Añadir, marcar como completadas y eliminar tareas</li>
+              <li>Contador de tareas pendientes</li>
+              <li>Persistencia de datos con LocalStorage</li>
+              <li>Interfaz de usuario intuitiva y responsive</li>
+            </ul>
+          </div>
+          
+          <div class="project-tech">
+            <h3>Tecnologías utilizadas:</h3>
+            <ul>
+              <li>HTML5 para la estructura</li>
+              <li>CSS3 para el diseño y estilo</li>
+              <li>JavaScript para la funcionalidad interactiva</li>
+              <li>LocalStorage para persistencia de datos</li>
+            </ul>
+          </div>
+          
+          <div class="project-links">
+            <a href="/proyectos/todolist" class="btn primary">Ver TodoList</a>
+          </div>
+        </div>
+        
+        <!-- Proyecto 3: Dashboard Interactivo -->
+        <div class="project-card">
+          <h2>Dashboard Interactivo</h2>
+          <p class="project-description">Un dashboard con visualizaciones de datos utilizando gráficos y estadísticas, ideal para monitorear métricas clave de negocio.</p>
+          
+          <div class="project-preview">
+            <img src="/dashboard.svg" alt="Vista previa del dashboard" class="preview-image">
+          </div>
+          
+          <div class="project-features">
+            <h3>Características principales:</h3>
+            <ul>
+              <li>Visualización de datos con gráficos interactivos</li>
+              <li>Múltiples secciones de análisis</li>
+              <li>Selector de períodos de tiempo</li>
+              <li>Tarjetas de estadísticas con métricas clave</li>
+            </ul>
+          </div>
+          
+          <div class="project-tech">
+            <h3>Tecnologías utilizadas:</h3>
+            <ul>
+              <li>HTML5 y CSS3 para la estructura y diseño</li>
+              <li>JavaScript para la interactividad</li>
+              <li>Chart.js para la visualización de datos</li>
+              <li>Diseño responsive para diferentes dispositivos</li>
+            </ul>
+          </div>
+          
+          <div class="project-links">
+            <a href="/proyectos/dashboard" class="btn primary">Ver Dashboard</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  // Lógica de la calculadora
+  document.addEventListener('DOMContentLoaded', () => {
+    const calculator = {
+      displayValue: '0',
+      firstOperand: null,
+      waitingForSecondOperand: false,
+      operator: null,
+    };
+
+    function updateDisplay() {
+      const display = document.getElementById('display');
+      display.textContent = calculator.displayValue;
+    }
+
+    function inputDigit(digit) {
+      const { displayValue, waitingForSecondOperand } = calculator;
+
+      if (waitingForSecondOperand === true) {
+        calculator.displayValue = digit;
+        calculator.waitingForSecondOperand = false;
+      } else {
+        calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+      }
+    }
+
+    function inputDecimal(dot) {
+      if (calculator.waitingForSecondOperand === true) {
+        calculator.displayValue = '0.';
+        calculator.waitingForSecondOperand = false;
+        return;
+      }
+
+      if (!calculator.displayValue.includes(dot)) {
+        calculator.displayValue += dot;
+      }
+    }
+
+    function handleOperator(nextOperator) {
+      const { firstOperand, displayValue, operator } = calculator;
+      const inputValue = parseFloat(displayValue);
+
+      if (operator && calculator.waitingForSecondOperand) {
+        calculator.operator = nextOperator;
+        return;
+      }
+
+      if (firstOperand === null && !isNaN(inputValue)) {
+        calculator.firstOperand = inputValue;
+      } else if (operator) {
+        const result = calculate(firstOperand, inputValue, operator);
+
+        calculator.displayValue = `${parseFloat(result.toFixed(7))}`;
+        calculator.firstOperand = result;
+      }
+
+      calculator.waitingForSecondOperand = true;
+      calculator.operator = nextOperator;
+    }
+
+    function calculate(firstOperand, secondOperand, operator) {
+      if (operator === '+') {
+        return firstOperand + secondOperand;
+      } else if (operator === '-') {
+        return firstOperand - secondOperand;
+      } else if (operator === '×') {
+        return firstOperand * secondOperand;
+      } else if (operator === '÷') {
+        return firstOperand / secondOperand;
+      }
+
+      return secondOperand;
+    }
+
+    function resetCalculator() {
+      calculator.displayValue = '0';
+      calculator.firstOperand = null;
+      calculator.waitingForSecondOperand = false;
+      calculator.operator = null;
+    }
+
+    const keys = document.querySelector('.calculator-keys');
+    keys.addEventListener('click', (event) => {
+      const { target } = event;
+      if (!target.matches('button')) {
+        return;
+      }
+
+      if (target.classList.contains('key-operator')) {
+        handleOperator(target.textContent);
+        updateDisplay();
+        return;
+      }
+
+      if (target.classList.contains('key-equal')) {
+        handleOperator('=');
+        updateDisplay();
+        return;
+      }
+
+      if (target.dataset.action === 'decimal') {
+        inputDecimal('.');
+        updateDisplay();
+        return;
+      }
+
+      if (target.dataset.action === 'clear') {
+        resetCalculator();
+        updateDisplay();
+        return;
+      }
+
+      inputDigit(target.textContent);
+      updateDisplay();
+    });
+  });
+</script>
+
+<style>
+  .projects-hero {
+    background-color: #1e293b;
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .projects-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .projects-content {
+    padding: 4rem 0;
+  }
+
+  .project-card {
+    background-color: #f8fafc;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .project-card h2 {
+    color: #1e293b;
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+  }
+
+  .project-description {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .project-features,
+  .project-tech {
+    margin-bottom: 1.5rem;
+  }
+
+  .project-features h3,
+  .project-tech h3 {
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+  }
+
+  .project-features ul,
+  .project-tech ul {
+    padding-left: 1.5rem;
+  }
+
+  .project-features li,
+  .project-tech li {
+    margin-bottom: 0.5rem;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .project-preview {
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .preview-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+
+  .primary:hover {
+    background-color: #2563eb;
+  }
+
+  .secondary {
+    background-color: transparent;
+    color: #1e293b;
+    border: 2px solid #1e293b;
+  }
+
+  .secondary:hover {
+    background-color: rgba(30, 41, 59, 0.1);
+  }
+
+  /* Estilos de la calculadora */
+  .calculator {
+    width: 300px;
+    margin: 2rem auto;
+    border-radius: 12px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+    background-color: #22252D;
+    overflow: hidden;
+  }
+
+  .calculator-display {
+    background-color: #22252D;
+    color: white;
+    text-align: right;
+    font-size: 2.5rem;
+    padding: 1.5rem 1rem;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .calculator-keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1px;
+    background-color: #292D36;
+    padding: 0.5rem;
+  }
+
+  .calculator-keys button {
+    border: none;
+    background-color: #292D36;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .calculator-keys button:hover {
+    background-color: #373b44;
+  }
+
+  .key-operator {
+    color: #26FED7 !important;
+  }
+
+  .key-equal {
+    grid-column: -2;
+    grid-row: 2 / span 4;
+    background-color: #4B5EFC !important;
+    height: 100%;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .project-links {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Mi Portfolio - Acerca de mí">
+  <main>
+    <section class="about-hero">
+      <div class="container">
+        <h1>Acerca de mí</h1>
+        <p class="subtitle">Conoce más sobre mi experiencia y trayectoria</p>
+      </div>
+    </section>
+
+    <section class="about-content">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image">
+            <img src="/foto mia.jpg" alt="Mi foto de perfil" onerror="this.src='/placeholder-profile.svg'">
+          </div>
+          <div class="about-text">
+            <h2>¿Quién soy?</h2>
+            <p>Soy un desarrollador front-end junior entusiasta, con una chispa creativa y ganas de dejar mi huella en el mundo digital. Me fascina transformar ideas en experiencias web rápidas y visualmente atractivas usando el poder de Astro. Estoy listo para sumergirme en proyectos estimulantes, aportar valor y seguir creciendo en un equipo innovador.</p>
+            
+            <h2>Mi trayectoria</h2>
+            <p>Hace un año inicié mi viaje en el desarrollo web, y desde entonces, me he sumergido de lleno en el desarrollo front-end. A través de diversos proyectos, he perfeccionado mis habilidades creando experiencias de usuario atractivas y funcionales.</p>
+            
+            <h2>Educación</h2>
+            <ul>
+              
+              <li>Certificado Profesional de Creación y Publicación de Páginas Web</li>
+             
+            </ul>
+            
+            <h2>Intereses</h2>
+            <p>Además del desarrollo web, me apasiona la inteligencia artificial, el diseño de experiencia de usuario y las tecnologías emergentes. En mi tiempo libre, disfruto de la fotografía, los videojuegos y el senderismo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .about-hero {
+    background-color: #1e293b;
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .about-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .about-content {
+    padding: 4rem 0;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+  }
+
+  .about-image img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .about-text h2 {
+    color: #1e293b;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .about-text h2:first-child {
+    margin-top: 0;
+  }
+
+  .about-text p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .about-text ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text li {
+    margin-bottom: 0.5rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image {
+      margin-bottom: 2rem;
+    }
+  }
+</style>
