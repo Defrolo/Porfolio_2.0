@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buscador de Películas</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Buscador de Películas</h1>
+        <form id="search-form">
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Buscar película..."
+              required
+            />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </div>
+        </form>
+      </header>
+
+      <main>
+        <div id="results-container">
+          <!-- Aquí se mostrarán los resultados de la búsqueda -->
+        </div>
+
+        <!-- El contenedor de detalles se ha movido a detalles.html -->
+
+        <div id="loading" class="hidden">
+          <div class="spinner"></div>
+        </div>
+
+        <div id="error-message" class="hidden">
+          <!-- Mensajes de error -->
+        </div>
+      </main>
+
+      <footer>
+        <p>
+          Desarrollado con <i class="fas fa-heart"></i> | Usando la API de OMDB
+        </p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

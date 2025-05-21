@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalles de Película</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Detalles de Película</h1>
+      </header>
+
+      <main>
+        <div id="movie-details">
+          <!-- Aquí se mostrarán los detalles de la película seleccionada -->
+        </div>
+
+        <div id="loading" class="hidden">
+          <div class="spinner"></div>
+        </div>
+
+        <div id="error-message" class="hidden">
+          <!-- Mensajes de error -->
+        </div>
+      </main>
+
+      <footer>
+        <p>
+          Desarrollado con <i class="fas fa-heart"></i> | Usando la API de OMDB
+        </p>
+      </footer>
+    </div>
+
+    <script src="detalles.js"></script>
+  </body>
+</html>

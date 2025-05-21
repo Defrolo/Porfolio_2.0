@@ -1,0 +1,522 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Lista de Tareas - Mi Portfolio">
+  <main>
+    <section class="todolist-hero">
+      <div class="container">
+        <h1>Lista de Tareas</h1>
+        <p class="subtitle">Una aplicación interactiva para gestionar tus tareas diarias</p>
+      </div>
+    </section>
+
+    <section class="todolist-content">
+      <div class="container">
+        <div class="todolist-description">
+          <p>Esta aplicación de lista de tareas te permite organizar tus actividades diarias de manera eficiente. Puedes añadir, marcar como completadas y eliminar tareas según sea necesario.</p>
+          <p>Prueba la aplicación a continuación:</p>
+        </div>
+
+        <!-- TodoList interactivo -->
+        <div class="todolist-app">
+          <div class="todolist-header">
+            <h2>Mis Tareas</h2>
+            <div class="todolist-form">
+              <div class="input-group">
+                <input type="text" id="task-input" placeholder="Añadir nueva tarea..." />
+                <div class="image-upload">
+                  <label for="task-image-input" class="image-upload-label">
+                    <span class="image-icon">📷</span>
+                  </label>
+                  <input type="file" id="task-image-input" accept="image/*" />
+                </div>
+              </div>
+              <div id="image-preview" class="image-preview"></div>
+              <button id="add-task-btn">Añadir</button>
+            </div>
+          </div>
+          <div class="todolist-stats">
+            <span id="pending-tasks">0 tareas pendientes</span>
+            <button id="clear-completed-btn">Limpiar completadas</button>
+          </div>
+          <ul id="tasks-list" class="tasks-list">
+            <!-- Las tareas se añadirán aquí dinámicamente -->
+          </ul>
+        </div>
+
+        <div class="todolist-details">
+          <h2>Detalles técnicos</h2>
+          <p>Esta aplicación de lista de tareas fue desarrollada utilizando:</p>
+          <ul>
+            <li>HTML5 para la estructura</li>
+            <li>CSS3 para el diseño y estilo</li>
+            <li>JavaScript para la funcionalidad interactiva</li>
+            <li>LocalStorage para persistencia de datos</li>
+          </ul>
+          <p>La aplicación implementa operaciones CRUD (Crear, Leer, Actualizar, Eliminar) y mantiene el estado de las tareas incluso después de cerrar el navegador.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Elementos del DOM
+    const taskInput = document.getElementById('task-input');
+    const addTaskBtn = document.getElementById('add-task-btn');
+    const tasksList = document.getElementById('tasks-list');
+    const pendingTasksEl = document.getElementById('pending-tasks');
+    const clearCompletedBtn = document.getElementById('clear-completed-btn');
+    
+    // Estado de la aplicación
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    
+    // Convertir tareas antiguas al nuevo formato si es necesario
+    tasks = tasks.map(task => {
+      if (!task.hasOwnProperty('imageUrl')) {
+        return { ...task, imageUrl: '' };
+      }
+      return task;
+    });
+    
+    // Renderizar tareas iniciales
+    renderTasks();
+    updatePendingCount();
+    
+    // Event listeners
+    addTaskBtn.addEventListener('click', addTask);
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') addTask();
+    });
+    clearCompletedBtn.addEventListener('click', clearCompleted);
+    
+    // Event listener para la vista previa de imágenes
+    const taskImageInput = document.getElementById('task-image-input');
+    const imagePreview = document.getElementById('image-preview');
+    
+    taskImageInput.addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          imagePreview.innerHTML = `<img src="${e.target.result}" alt="Vista previa" />`;
+          imagePreview.style.display = 'block';
+        };
+        
+        reader.readAsDataURL(this.files[0]);
+      } else {
+        imagePreview.innerHTML = '';
+        imagePreview.style.display = 'none';
+      }
+    });
+    
+    // Funciones
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      const taskImageInput = document.getElementById('task-image-input');
+      let imageUrl = '';
+      
+      if (taskImageInput.files && taskImageInput.files[0]) {
+        // Convertir la imagen a base64 para almacenarla en localStorage
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          imageUrl = e.target.result;
+          
+          const newTask = {
+            id: Date.now().toString(),
+            text: taskText,
+            completed: false,
+            createdAt: new Date(),
+            imageUrl: imageUrl
+          };
+          
+          tasks.push(newTask);
+          saveTasks();
+          renderTasks();
+          updatePendingCount();
+          taskInput.value = '';
+          taskImageInput.value = '';
+          document.getElementById('image-preview').style.display = 'none';
+          taskInput.focus();
+        };
+        reader.readAsDataURL(taskImageInput.files[0]);
+      } else if (taskText) {
+        const newTask = {
+          id: Date.now().toString(),
+          text: taskText,
+          completed: false,
+          createdAt: new Date(),
+          imageUrl: ''
+        };
+        
+        tasks.push(newTask);
+        saveTasks();
+        renderTasks();
+        updatePendingCount();
+        taskInput.value = '';
+        taskInput.focus();
+      }
+    }
+    
+    function toggleTask(id) {
+      tasks = tasks.map(task => {
+        if (task.id === id) {
+          return { ...task, completed: !task.completed };
+        }
+        return task;
+      });
+      
+      saveTasks();
+      renderTasks();
+      updatePendingCount();
+    }
+    
+    function deleteTask(id) {
+      tasks = tasks.filter(task => task.id !== id);
+      saveTasks();
+      renderTasks();
+      updatePendingCount();
+    }
+    
+    function clearCompleted() {
+      tasks = tasks.filter(task => !task.completed);
+      saveTasks();
+      renderTasks();
+      updatePendingCount();
+    }
+    
+    function renderTasks() {
+      tasksList.innerHTML = '';
+      
+      if (tasks.length === 0) {
+        const emptyMessage = document.createElement('li');
+        emptyMessage.className = 'empty-message';
+        emptyMessage.textContent = 'No hay tareas pendientes. ¡Añade una!';
+        tasksList.appendChild(emptyMessage);
+        return;
+      }
+      
+      tasks.forEach(task => {
+        const taskItem = document.createElement('li');
+        taskItem.className = `task-item ${task.completed ? 'completed' : ''}`;
+        
+        let taskContent = `
+          <div class="task-content">
+            <span class="task-text">${task.text}</span>
+          </div>
+        `;
+        
+        // Añadir imagen si existe
+        if (task.imageUrl) {
+          taskContent = `
+            <div class="task-content">
+              <span class="task-text">${task.text}</span>
+              <div class="task-image-container">
+                <img src="${task.imageUrl}" alt="Imagen de la tarea" class="task-image" />
+              </div>
+            </div>
+          `;
+        }
+        
+        taskItem.innerHTML = `
+          ${taskContent}
+          <div class="task-actions">
+            <button class="complete-task-btn ${task.completed ? 'completed' : ''}">
+              ${task.completed ? '✓' : 'Completar'}
+            </button>
+            <button class="delete-task-btn">×</button>
+          </div>
+        `;
+        
+        // Event listeners para los elementos de la tarea
+        const completeBtn = taskItem.querySelector('.complete-task-btn');
+        completeBtn.addEventListener('click', () => toggleTask(task.id));
+        
+        const deleteBtn = taskItem.querySelector('.delete-task-btn');
+        deleteBtn.addEventListener('click', () => deleteTask(task.id));
+        
+        tasksList.appendChild(taskItem);
+      });
+    }
+    
+    function updatePendingCount() {
+      const pendingCount = tasks.filter(task => !task.completed).length;
+      pendingTasksEl.textContent = `${pendingCount} ${pendingCount === 1 ? 'tarea pendiente' : 'tareas pendientes'}`;
+    }
+    
+    function saveTasks() {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+  });
+</script>
+
+<style>
+  .todolist-hero {
+    background-color: #1e293b;
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .todolist-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .todolist-content {
+    padding: 4rem 0;
+  }
+
+  .todolist-description {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .todolist-details {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    padding: 2rem;
+    background-color: #f8fafc;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .todolist-details h2 {
+    color: #1e293b;
+    margin-bottom: 1rem;
+  }
+
+  .todolist-details ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .todolist-details li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Estilos de la aplicación TodoList */
+  .todolist-app {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .todolist-header {
+    background-color: #4B5EFC;
+    color: white;
+    padding: 1.5rem;
+  }
+
+  .todolist-header h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.8rem;
+  }
+
+  .todolist-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .input-group {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .todolist-form input[type="text"] {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .image-upload {
+    position: relative;
+  }
+  
+  .image-upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #f1f5f9;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .image-icon {
+    font-size: 1.2rem;
+  }
+  
+  input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  
+  .image-preview {
+    display: none;
+    width: 100%;
+    max-height: 100px;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .todolist-form button {
+    background-color: #26FED7;
+    color: #1e293b;
+    border: none;
+    border-radius: 4px;
+    padding: 0.8rem 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .todolist-form button:hover {
+    background-color: #20d9b8;
+  }
+
+  .todolist-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  #clear-completed-btn {
+    background: none;
+    border: none;
+    color: #4B5EFC;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  #clear-completed-btn:hover {
+    text-decoration: underline;
+  }
+
+  .tasks-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.2s;
+  }
+
+  .task-item:hover {
+    background-color: #f8fafc;
+  }
+
+  .task-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    flex: 1;
+  }
+
+  .task-text {
+    font-size: 1rem;
+    color: #1e293b;
+  }
+
+  .task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #94a3b8;
+  }
+  
+  .task-image-container {
+    max-width: 200px;
+    margin-top: 0.5rem;
+  }
+  
+  .task-image {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .task-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .complete-task-btn {
+    background-color: #4B5EFC;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .complete-task-btn:hover {
+    background-color: #3a4cca;
+  }
+  
+  .complete-task-btn.completed {
+    background-color: #10b981;
+  }
+
+  .delete-task-btn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .delete-task-btn:hover {
+    opacity: 1;
+  }
+
+  .empty-message {
+    text-align: center;
+    padding: 2rem;
+    color: #94a3b8;
+    font-style: italic;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+</style>

@@ -1,0 +1,755 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Dashboard - Mi Portfolio">
+  <main>
+    <section class="dashboard-hero">
+      <div class="container">
+        <h1>Dashboard Interactivo</h1>
+        <p class="subtitle">Una visualización de datos con gráficos y estadísticas</p>
+      </div>
+    </section>
+
+    <section class="dashboard-content">
+      <div class="container">
+        <div class="dashboard-description">
+          <p>Este dashboard interactivo muestra diferentes visualizaciones de datos utilizando gráficos y estadísticas. Es un ejemplo de cómo se pueden presentar datos de manera visual e intuitiva.</p>
+          <p>Explora las diferentes secciones a continuación:</p>
+        </div>
+
+        <!-- Dashboard interactivo -->
+        <div class="dashboard-container">
+          <div class="dashboard-sidebar">
+            <h3>Panel de Control</h3>
+            <ul class="dashboard-menu">
+              <li class="active" data-section="overview">Vista General</li>
+              <li data-section="sales">Ventas</li>
+              <li data-section="users">Usuarios</li>
+              <li data-section="performance">Rendimiento</li>
+            </ul>
+            <div class="dashboard-period">
+              <h4>Período</h4>
+              <select id="period-selector">
+                <option value="day">Hoy</option>
+                <option value="week">Esta semana</option>
+                <option value="month" selected>Este mes</option>
+                <option value="year">Este año</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="dashboard-main">
+            <!-- Sección de Vista General -->
+            <div class="dashboard-section active" id="overview-section">
+              <h2>Vista General</h2>
+              
+              <div class="stats-cards">
+                <div class="stat-card">
+                  <div class="stat-icon" style="background-color: rgba(75, 94, 252, 0.2); color: #4B5EFC;">📊</div>
+                  <div class="stat-info">
+                    <h3>Ventas Totales</h3>
+                    <p class="stat-value">$<span id="total-sales">24,582</span></p>
+                    <p class="stat-change positive">↑ 12.5% vs mes anterior</p>
+                  </div>
+                </div>
+                
+                <div class="stat-card">
+                  <div class="stat-icon" style="background-color: rgba(38, 254, 215, 0.2); color: #26FED7;">👥</div>
+                  <div class="stat-info">
+                    <h3>Nuevos Usuarios</h3>
+                    <p class="stat-value"><span id="new-users">847</span></p>
+                    <p class="stat-change positive">↑ 8.3% vs mes anterior</p>
+                  </div>
+                </div>
+                
+                <div class="stat-card">
+                  <div class="stat-icon" style="background-color: rgba(252, 94, 75, 0.2); color: #FC5E4B;">⏱️</div>
+                  <div class="stat-info">
+                    <h3>Tiempo Promedio</h3>
+                    <p class="stat-value"><span id="avg-time">5.2</span> min</p>
+                    <p class="stat-change negative">↓ 3.1% vs mes anterior</p>
+                  </div>
+                </div>
+                
+                <div class="stat-card">
+                  <div class="stat-icon" style="background-color: rgba(254, 215, 38, 0.2); color: #FED726;">🔄</div>
+                  <div class="stat-info">
+                    <h3>Tasa de Conversión</h3>
+                    <p class="stat-value"><span id="conversion-rate">3.6</span>%</p>
+                    <p class="stat-change positive">↑ 0.8% vs mes anterior</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="chart-container">
+                <div class="chart-header">
+                  <h3>Rendimiento Mensual</h3>
+                  <div class="chart-legend">
+                    <span class="legend-item"><span class="legend-color" style="background-color: #4B5EFC;"></span> Ventas</span>
+                    <span class="legend-item"><span class="legend-color" style="background-color: #26FED7;"></span> Usuarios</span>
+                  </div>
+                </div>
+                <canvas id="main-chart"></canvas>
+              </div>
+            </div>
+            
+            <!-- Otras secciones estarán ocultas inicialmente -->
+            <div class="dashboard-section" id="sales-section">
+              <h2>Análisis de Ventas</h2>
+              <div class="section-content">
+                <div class="section-stats">
+                  <div class="stat-card wide">
+                    <h3>Ventas por Categoría</h3>
+                    <div class="stat-chart-container">
+                      <canvas id="sales-category-chart"></canvas>
+                    </div>
+                  </div>
+                  <div class="stat-card wide">
+                    <h3>Tendencia de Ventas</h3>
+                    <div class="stat-value">$24,582</div>
+                    <div class="stat-chart-container small">
+                      <div class="mini-chart">📈</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="dashboard-section" id="users-section">
+              <h2>Análisis de Usuarios</h2>
+              <div class="section-content">
+                <div class="section-stats">
+                  <div class="stat-card">
+                    <h3>Nuevos Usuarios</h3>
+                    <div class="stat-value">847</div>
+                    <div class="stat-change positive">↑ 8.3%</div>
+                  </div>
+                  <div class="stat-card">
+                    <h3>Usuarios Activos</h3>
+                    <div class="stat-value">2,456</div>
+                    <div class="stat-change positive">↑ 12.1%</div>
+                  </div>
+                  <div class="stat-card">
+                    <h3>Retención</h3>
+                    <div class="stat-value">68.4%</div>
+                    <div class="stat-change negative">↓ 2.3%</div>
+                  </div>
+                </div>
+                <div class="stat-chart-container">
+                  <canvas id="users-chart"></canvas>
+                </div>
+              </div>
+            </div>
+            
+            <div class="dashboard-section" id="performance-section">
+              <h2>Análisis de Rendimiento</h2>
+              <div class="section-content">
+                <div class="performance-metrics">
+                  <div class="metric-card">
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-value">98.2%</div>
+                    <div class="metric-label">Tiempo de Actividad</div>
+                  </div>
+                  <div class="metric-card">
+                    <div class="metric-icon">🚀</div>
+                    <div class="metric-value">1.2s</div>
+                    <div class="metric-label">Tiempo de Carga</div>
+                  </div>
+                  <div class="metric-card">
+                    <div class="metric-icon">📱</div>
+                    <div class="metric-value">68%</div>
+                    <div class="metric-label">Tráfico Móvil</div>
+                  </div>
+                </div>
+                <div class="stat-chart-container">
+                  <canvas id="performance-chart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-details">
+          <h2>Detalles técnicos</h2>
+          <p>Este dashboard interactivo fue desarrollado utilizando:</p>
+          <ul>
+            <li>HTML5 y CSS3 para la estructura y diseño</li>
+            <li>JavaScript para la interactividad</li>
+            <li>Chart.js para la visualización de datos</li>
+            <li>Diseño responsive para adaptarse a diferentes dispositivos</li>
+          </ul>
+          <p>En un entorno real, este dashboard se conectaría a una API para obtener datos en tiempo real.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Cambiar entre secciones del dashboard
+    const menuItems = document.querySelectorAll('.dashboard-menu li');
+    const sections = document.querySelectorAll('.dashboard-section');
+    
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // Actualizar menú activo
+        menuItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        
+        // Mostrar sección correspondiente
+        const sectionId = item.dataset.section;
+        sections.forEach(section => {
+          section.classList.remove('active');
+          if (section.id === `${sectionId}-section`) {
+            section.classList.add('active');
+          }
+        });
+      });
+    });
+    
+    // Selector de período
+    const periodSelector = document.getElementById('period-selector');
+    periodSelector.addEventListener('change', updateDashboardData);
+    
+    // Función para actualizar datos del dashboard según el período seleccionado
+    function updateDashboardData() {
+      const period = periodSelector.value;
+      let salesData, usersData, timeData, conversionData;
+      
+      // Simulación de diferentes datos según el período
+      switch(period) {
+        case 'day':
+          salesData = 1254;
+          usersData = 38;
+          timeData = 4.8;
+          conversionData = 3.2;
+          break;
+        case 'week':
+          salesData = 8976;
+          usersData = 215;
+          timeData = 5.0;
+          conversionData = 3.4;
+          break;
+        case 'month':
+          salesData = 24582;
+          usersData = 847;
+          timeData = 5.2;
+          conversionData = 3.6;
+          break;
+        case 'year':
+          salesData = 298450;
+          usersData = 9632;
+          timeData = 5.5;
+          conversionData = 3.9;
+          break;
+      }
+      
+      // Actualizar valores en el dashboard
+      document.getElementById('total-sales').textContent = salesData.toLocaleString();
+      document.getElementById('new-users').textContent = usersData.toLocaleString();
+      document.getElementById('avg-time').textContent = timeData;
+      document.getElementById('conversion-rate').textContent = conversionData;
+      
+      // Actualizar gráfico si ya está inicializado
+      if (window.mainChart) {
+        updateChart(period);
+      }
+    }
+    
+    // Inicializar gráfico
+    window.mainChart = null;
+    
+    function initChart() {
+      const canvas = document.getElementById('main-chart');
+      if (!canvas) {
+        console.error('No se encontró el elemento canvas para el gráfico');
+        return;
+      }
+      
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        console.error('No se pudo obtener el contexto 2D del canvas');
+        return;
+      }
+      
+      // Datos de ejemplo para el gráfico
+      const labels = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+      const salesData = [12500, 14200, 16800, 18500, 19200, 21500, 22800, 23100, 24000, 24582, 0, 0];
+      const usersData = [450, 520, 580, 620, 680, 720, 750, 790, 820, 847, 0, 0];
+      
+      window.mainChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Ventas',
+              data: salesData,
+              borderColor: '#4B5EFC',
+              backgroundColor: 'rgba(75, 94, 252, 0.1)',
+              tension: 0.4,
+              fill: true
+            },
+            {
+              label: 'Usuarios',
+              data: usersData,
+              borderColor: '#26FED7',
+              backgroundColor: 'rgba(38, 254, 215, 0.1)',
+              tension: 0.4,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              mode: 'index',
+              intersect: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          }
+        }
+      });
+    }
+    
+    function updateChart(period) {
+      // En una aplicación real, aquí se actualizarían los datos del gráfico
+      // según el período seleccionado
+      console.log(`Actualizando gráfico para período: ${period}`);
+      
+      if (!window.mainChart) {
+        console.error('El gráfico no está inicializado');
+        return;
+      }
+      
+      // Actualizar datos según el período
+      let salesData, usersData;
+      
+      switch(period) {
+        case 'day':
+          salesData = [120, 145, 165, 190, 210, 250, 280, 310, 350, 390, 420, 450];
+          usersData = [10, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 38];
+          break;
+        case 'week':
+          salesData = [850, 920, 980, 1050, 1120, 1200, 1280, 1350, 1420, 1500, 1580, 1650];
+          usersData = [45, 52, 58, 65, 72, 78, 85, 92, 98, 105, 112, 120];
+          break;
+        case 'month':
+          salesData = [12500, 14200, 16800, 18500, 19200, 21500, 22800, 23100, 24000, 24582, 25000, 25500];
+          usersData = [450, 520, 580, 620, 680, 720, 750, 790, 820, 847, 870, 900];
+          break;
+        case 'year':
+          salesData = [150000, 165000, 180000, 195000, 210000, 225000, 240000, 255000, 270000, 285000, 298450, 310000];
+          usersData = [5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 9632, 10000];
+          break;
+        default:
+          salesData = [12500, 14200, 16800, 18500, 19200, 21500, 22800, 23100, 24000, 24582, 25000, 25500];
+          usersData = [450, 520, 580, 620, 680, 720, 750, 790, 820, 847, 870, 900];
+      }
+      
+      // Actualizar datos del gráfico
+      window.mainChart.data.datasets[0].data = salesData;
+      window.mainChart.data.datasets[1].data = usersData;
+      window.mainChart.update();
+    }
+    
+    // Cargar Chart.js desde CDN y luego inicializar el gráfico
+    function loadChartJS() {
+      // Verificar si Chart.js ya está cargado
+      if (window.Chart) {
+        console.log('Chart.js ya está cargado');
+        initChart();
+        updateDashboardData(); // Inicializar con los datos por defecto
+        return;
+      }
+      
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+      script.async = true;
+      
+      script.onload = function() {
+        console.log('Chart.js cargado correctamente');
+        initChart();
+        updateDashboardData(); // Inicializar con los datos por defecto
+      };
+      
+      script.onerror = function() {
+        console.error('Error al cargar Chart.js');
+        // Mostrar mensaje de error en la interfaz
+        const chartContainer = document.querySelector('.chart-container');
+        if (chartContainer) {
+          chartContainer.innerHTML = '<div class="chart-error">Error al cargar el gráfico. Por favor, recarga la página.</div>';
+        }
+      };
+      
+      document.head.appendChild(script);
+    }
+    
+    // Iniciar la carga de Chart.js
+    loadChartJS();
+  });
+</script>
+
+<style>
+  .dashboard-hero {
+    background-color: #1e293b;
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .dashboard-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.9;
+  }
+  
+  .chart-error {
+    background-color: #fee2e2;
+    color: #ef4444;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    margin: 1rem 0;
+  }
+  
+  /* Estilos para las nuevas secciones */
+  .section-content {
+    margin-top: 1.5rem;
+  }
+  
+  .section-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .stat-card.wide {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+  
+  .stat-chart-container {
+    margin-top: 1rem;
+    height: 250px;
+    position: relative;
+  }
+  
+  .stat-chart-container.small {
+    height: 100px;
+  }
+  
+  .mini-chart {
+    font-size: 3rem;
+    text-align: center;
+    color: #4B5EFC;
+  }
+  
+  /* Estilos para la sección de rendimiento */
+  .performance-metrics {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .metric-card {
+    flex: 1;
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+  
+  .metric-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .metric-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+  }
+  
+  .metric-label {
+    color: #64748b;
+    font-size: 0.9rem;
+  }
+
+  .dashboard-content {
+    padding: 4rem 0;
+  }
+
+  .dashboard-description {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .dashboard-details {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    padding: 2rem;
+    background-color: #f8fafc;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .dashboard-details h2 {
+    color: #1e293b;
+    margin-bottom: 1rem;
+  }
+
+  .dashboard-details ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .dashboard-details li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Estilos del Dashboard */
+  .dashboard-container {
+    display: flex;
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .dashboard-sidebar {
+    width: 250px;
+    background-color: #f8fafc;
+    padding: 1.5rem;
+    border-right: 1px solid #e2e8f0;
+  }
+
+  .dashboard-sidebar h3 {
+    color: #1e293b;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.2rem;
+  }
+
+  .dashboard-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+  }
+
+  .dashboard-menu li {
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .dashboard-menu li:hover {
+    background-color: rgba(75, 94, 252, 0.1);
+    color: #4B5EFC;
+  }
+
+  .dashboard-menu li.active {
+    background-color: #4B5EFC;
+    color: white;
+  }
+
+  .dashboard-period h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: #64748b;
+  }
+
+  .dashboard-period select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  .dashboard-main {
+    flex: 1;
+    padding: 1.5rem;
+    overflow: auto;
+  }
+
+  .dashboard-section {
+    display: none;
+  }
+
+  .dashboard-section.active {
+    display: block;
+  }
+
+  .dashboard-section h2 {
+    margin: 0 0 1.5rem 0;
+    color: #1e293b;
+  }
+
+  /* Tarjetas de estadísticas */
+  .stats-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .stat-info h3 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+
+  .stat-value {
+    margin: 0.3rem 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1e293b;
+  }
+
+  .stat-change {
+    margin: 0;
+    font-size: 0.8rem;
+  }
+
+  .stat-change.positive {
+    color: #10b981;
+  }
+
+  .stat-change.negative {
+    color: #ef4444;
+  }
+
+  /* Contenedor de gráficos */
+  .chart-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    height: 350px;
+  }
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .chart-header h3 {
+    margin: 0;
+    color: #1e293b;
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+
+  .legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+
+  #main-chart {
+    width: 100%;
+    height: 280px;
+  }
+
+  /* Gráficos de marcador de posición */
+  .placeholder-chart {
+    height: 300px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-style: italic;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .dashboard-container {
+      flex-direction: column;
+    }
+
+    .dashboard-sidebar {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .stats-cards {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+</style>

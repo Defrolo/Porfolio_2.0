@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="300" height="400">
+  <!-- Fondo y sombra de la calculadora -->
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  
+  <!-- Cuerpo de la calculadora -->
+  <rect x="40" y="30" width="220" height="340" rx="20" fill="#2d3748" stroke="#4a5568" stroke-width="2" filter="url(#shadow)"/>
+  
+  <!-- Pantalla de la calculadora -->
+  <rect x="55" y="50" width="190" height="70" rx="10" fill="#e2e8f0" stroke="#a0aec0" stroke-width="1"/>
+  <text x="230" y="100" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#1a202c" text-anchor="end">123.45</text>
+  
+  <!-- Botones de la calculadora -->
+  <!-- Fila 1 -->
+  <rect x="55" y="140" width="40" height="40" rx="8" fill="#4B5EFC" stroke="#3c4fe0" stroke-width="1"/>
+  <text x="75" y="167" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">AC</text>
+  
+  <rect x="105" y="140" width="40" height="40" rx="8" fill="#4B5EFC" stroke="#3c4fe0" stroke-width="1"/>
+  <text x="125" y="167" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">±</text>
+  
+  <rect x="155" y="140" width="40" height="40" rx="8" fill="#4B5EFC" stroke="#3c4fe0" stroke-width="1"/>
+  <text x="175" y="167" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">%</text>
+  
+  <rect x="205" y="140" width="40" height="40" rx="8" fill="#FF9500" stroke="#e68600" stroke-width="1"/>
+  <text x="225" y="167" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">÷</text>
+  
+  <!-- Fila 2 -->
+  <rect x="55" y="190" width="40" height="40" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="1"/>
+  <text x="75" y="217" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">7</text>
+  
+  <rect x="105" y="190" width="40" height="40" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="1"/>
+  <text x="125" y="217" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">8</text>
+  
+  <rect x="155" y="190" width="40" height="40" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="1"/>
+  <text x="175" y="217" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">9</text>
+  
+  <rect x="205" y="190" width="40" height="40" rx="8" fill="#FF9500" stroke="#e68600" stroke-width="1"/>
+  <text x="225" y="217" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">×</text>
+  
+  <!-- Fila 3 -->
+  <rect x="55" y="240" width="40" height="40" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="1"/>
+  <text x="75" y="267" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">4</text>
+  
+  <rect x="105" y="240" width="40" height="40" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="1"/>
+  <text x="125" y="267" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">5</text>
+  
+  <rect x="155" y="240" width="40" height="40" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="1"/>
+  <text x="175" y="267" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">6</text>
+  
+  <rect x="205" y="240" width="40" height="40" rx="8" fill="#FF9500" stroke="#e68600" stroke-width="1"/>
+  <text x="225" y="267" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">−</text>
+  
+  <!-- Fila 4 -->
+  <rect x="55" y="290" width="40" height="40" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="1"/>
+  <text x="75" y="317" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">1</text>
+  
+  <rect x="105" y="290" width="40" height="40" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="1"/>
+  <text x="125" y="317" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">2</text>
+  
+  <rect x="155" y="290" width="40" height="40" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="1"/>
+  <text x="175" y="317" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">3</text>
+  
+  <rect x="205" y="290" width="40" height="40" rx="8" fill="#FF9500" stroke="#e68600" stroke-width="1"/>
+  <text x="225" y="317" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">+</text>
+  
+  <!-- Fila 5 -->
+  <rect x="55" y="330" width="90" height="30" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="1"/>
+  <text x="100" y="350" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">0</text>
+  
+  <rect x="155" y="330" width="40" height="30" rx="8" fill="#4a5568" stroke="#2d3748" stroke-width="1"/>
+  <text x="175" y="350" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">.</text>
+  
+  <rect x="205" y="330" width="40" height="30" rx="8" fill="#FF9500" stroke="#e68600" stroke-width="1"/>
+  <text x="225" y="350" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">=</text>
+  
+  <!-- Reflejo en la parte superior de la calculadora -->
+  <rect x="55" y="35" width="190" height="10" rx="5" fill="white" opacity="0.1"/>
+</svg>
