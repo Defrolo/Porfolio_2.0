@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TiendaVirtual - Tu Tienda Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <h1>TiendaVirtual</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#categorias">Categorías</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Bienvenido a TiendaVirtual</h2>
+            <p>Descubre nuestros productos de alta calidad a precios increíbles</p>
+            <a href="#productos" class="btn">Ver Productos</a>
+        </div>
+    </section>
+
+    <section id="productos" class="productos">
+        <h2>Nuestros Productos</h2>
+        <div class="productos-grid" id="productos-container">
+            <!-- Los productos se cargarán dinámicamente desde JavaScript -->
+        </div>
+    </section>
+
+    <section id="categorias" class="categorias">
+        <h2>Categorías</h2>
+        <div class="categorias-container">
+            <div class="categoria">
+                <img src="img/electronica.svg" alt="Electrónica">
+                <h3>Electrónica</h3>
+            </div>
+            <div class="categoria">
+                <img src="img/ropa.svg" alt="Ropa">
+                <h3>Ropa</h3>
+            </div>
+            <div class="categoria">
+                <img src="img/hogar.svg" alt="Hogar">
+                <h3>Hogar</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="contacto">
+        <h2>Contacto</h2>
+        <div class="contacto-container">
+            <form id="contacto-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" required></textarea>
+                </div>
+                <button type="submit" class="btn">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="carrito-modal" id="carrito-modal">
+        <div class="carrito-contenido">
+            <span class="cerrar-carrito">&times;</span>
+            <h2>Tu Carrito</h2>
+            <div id="carrito-items">
+                <!-- Los items del carrito se cargarán dinámicamente -->
+            </div>
+            <div class="carrito-total">
+                <p>Total: <span id="carrito-total">$0.00</span></p>
+                <button id="finalizar-compra" class="btn">Finalizar Compra</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>TiendaVirtual</h3>
+                <p>Tu tienda online de confianza para todos tus productos favoritos.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#categorias">Categorías</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Calle Ficticia 123, Ciudad</p>
+                <p><i class="fas fa-phone"></i> +123 456 7890</p>
+                <p><i class="fas fa-envelope"></i> info@tiendavirtual.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 TiendaVirtual. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

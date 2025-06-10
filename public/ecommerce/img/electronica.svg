@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200">
+  <rect width="300" height="200" fill="#e6f7ff"/>
+  
+  <!-- Smartphone outline -->
+  <rect x="110" y="40" width="80" height="140" rx="10" ry="10" stroke="#0066cc" stroke-width="3" fill="#ffffff"/>
+  
+  <!-- Screen -->
+  <rect x="120" y="50" width="60" height="100" rx="2" ry="2" fill="#0099ff"/>
+  
+  <!-- Home button -->
+  <circle cx="150" cy="165" r="8" fill="#dddddd" stroke="#0066cc" stroke-width="1"/>
+  
+  <!-- Camera -->
+  <circle cx="150" cy="30" r="3" fill="#0066cc"/>
+  
+  <!-- Text -->
+  <text x="150" y="190" font-family="Arial" font-size="16" text-anchor="middle" fill="#0066cc">Electrónica</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200">
+  <rect width="300" height="200" fill="#f8fafc"/>
+  
+  <!-- Store front outline -->
+  <rect x="50" y="40" width="200" height="120" fill="#ffffff" stroke="#3b82f6" stroke-width="3" rx="5" ry="5"/>
+  
+  <!-- Store sign -->
+  <rect x="70" y="50" width="160" height="30" fill="#3b82f6" rx="3" ry="3"/>
+  <text x="150" y="70" font-family="Arial" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">TIENDA VIRTUAL</text>
+  
+  <!-- Store window -->
+  <rect x="70" y="90" width="160" height="50" fill="#e0f2fe" stroke="#3b82f6" stroke-width="2" rx="2" ry="2"/>
+  
+  <!-- Products in window -->
+  <rect x="80" y="100" width="20" height="30" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <rect x="110" y="100" width="20" height="30" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <rect x="140" y="100" width="20" height="30" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <rect x="170" y="100" width="20" height="30" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  
+  <!-- Door -->
+  <rect x="125" y="150" width="50" height="10" fill="#3b82f6"/>
+  
+  <!-- Shopping cart -->
+  <circle cx="220" cy="170" r="15" fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="240" cy="170" r="15" fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+  <path d="M200,140 L180,170 L250,170 L240,140 Z" fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="190" y1="150" x2="230" y2="150" stroke="#3b82f6" stroke-width="1.5"/>
+  <line x1="195" y1="160" x2="235" y2="160" stroke="#3b82f6" stroke-width="1.5"/>
+  
+  <!-- Text label -->
+  <text x="150" y="190" font-family="Arial" font-size="14" text-anchor="middle" fill="#1e293b" font-weight="bold">E-Commerce</text>
+</svg>

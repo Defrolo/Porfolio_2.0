@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200">
+  <rect width="300" height="200" fill="#f0fff0"/>
+  
+  <!-- House outline -->
+  <path d="M80,120 L150,60 L220,120 L220,170 L80,170 Z" fill="#ffffff" stroke="#4CAF50" stroke-width="3"/>
+  
+  <!-- Roof -->
+  <path d="M70,120 L150,50 L230,120" fill="none" stroke="#4CAF50" stroke-width="4"/>
+  
+  <!-- Door -->
+  <rect x="130" y="120" width="40" height="50" fill="#e8f5e9" stroke="#4CAF50" stroke-width="2"/>
+  <circle cx="140" cy="145" r="3" fill="#4CAF50"/>
+  
+  <!-- Window -->
+  <rect x="90" y="130" width="25" height="25" fill="#e8f5e9" stroke="#4CAF50" stroke-width="2"/>
+  <line x1="90" y1="142.5" x2="115" y2="142.5" stroke="#4CAF50" stroke-width="2"/>
+  <line x1="102.5" y1="130" x2="102.5" y2="155" stroke="#4CAF50" stroke-width="2"/>
+  
+  <!-- Window -->
+  <rect x="185" y="130" width="25" height="25" fill="#e8f5e9" stroke="#4CAF50" stroke-width="2"/>
+  <line x1="185" y1="142.5" x2="210" y2="142.5" stroke="#4CAF50" stroke-width="2"/>
+  <line x1="197.5" y1="130" x2="197.5" y2="155" stroke="#4CAF50" stroke-width="2"/>
+  
+  <!-- Text -->
+  <text x="150" y="190" font-family="Arial" font-size="16" text-anchor="middle" fill="#4CAF50">Hogar</text>
+</svg>

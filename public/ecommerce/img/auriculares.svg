@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200">
+  <rect width="300" height="200" fill="#f5f5f5"/>
+  
+  <!-- Headphone band -->
+  <path d="M100,100 C100,60 200,60 200,100" fill="none" stroke="#333333" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Left ear cup -->
+  <g transform="translate(90,100)">
+    <ellipse cx="0" cy="0" rx="20" ry="30" fill="#555555"/>
+    <ellipse cx="0" cy="0" rx="15" ry="25" fill="#333333"/>
+    <ellipse cx="0" cy="0" rx="8" ry="15" fill="#222222"/>
+  </g>
+  
+  <!-- Right ear cup -->
+  <g transform="translate(210,100)">
+    <ellipse cx="0" cy="0" rx="20" ry="30" fill="#555555"/>
+    <ellipse cx="0" cy="0" rx="15" ry="25" fill="#333333"/>
+    <ellipse cx="0" cy="0" rx="8" ry="15" fill="#222222"/>
+  </g>
+  
+  <!-- Left support -->
+  <path d="M100,100 L100,130" fill="none" stroke="#333333" stroke-width="5" stroke-linecap="round"/>
+  
+  <!-- Right support -->
+  <path d="M200,100 L200,130" fill="none" stroke="#333333" stroke-width="5" stroke-linecap="round"/>
+  
+  <!-- Cable -->
+  <path d="M90,130 C80,150 120,170 150,170" fill="none" stroke="#333333" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Sound waves (left) -->
+  <path d="M60,100 C50,90 50,110 60,100" fill="none" stroke="#4285f4" stroke-width="2" opacity="0.7"/>
+  <path d="M50,100 C35,85 35,115 50,100" fill="none" stroke="#4285f4" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Sound waves (right) -->
+  <path d="M240,100 C250,90 250,110 240,100" fill="none" stroke="#4285f4" stroke-width="2" opacity="0.7"/>
+  <path d="M250,100 C265,85 265,115 250,100" fill="none" stroke="#4285f4" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Text label -->
+  <text x="150" y="180" font-family="Arial" font-size="14" text-anchor="middle" fill="#333333">Auriculares Inalámbricos</text>
+</svg>

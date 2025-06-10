@@ -1,0 +1,207 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Mi Portfolio - Proyecto E-Commerce">
+  <main>
+    <section class="project-hero">
+      <div class="container">
+        <h1>Tienda Virtual (E-Commerce)</h1>
+        <p class="subtitle">Un sitio web de comercio electrónico con carrito de compras y catálogo de productos</p>
+      </div>
+    </section>
+
+    <section class="project-details">
+      <div class="container">
+        <div class="project-overview">
+          <h2>Descripción del Proyecto</h2>
+          <p>
+            Este proyecto es una tienda virtual ficticia desarrollada con HTML, CSS y JavaScript. Incluye un catálogo de productos, un carrito de compras interactivo, categorías de productos y un formulario de contacto.
+          </p>
+          <p>
+            La tienda está diseñada para ser completamente responsive, adaptándose a diferentes tamaños de pantalla, desde móviles hasta escritorios.
+          </p>
+        </div>
+
+        <div class="project-preview">
+          <img src="/ecommerce.svg" alt="Vista previa de la tienda virtual" class="preview-image">
+        </div>
+
+        <div class="project-features">
+          <h2>Características Principales</h2>
+          <ul>
+            <li><strong>Catálogo de Productos:</strong> Muestra una variedad de productos con imágenes, descripciones y precios.</li>
+            <li><strong>Carrito de Compras:</strong> Permite añadir productos, modificar cantidades y eliminar items.</li>
+            <li><strong>Categorías:</strong> Los productos están organizados por categorías (Electrónica, Ropa, Hogar).</li>
+            <li><strong>Formulario de Contacto:</strong> Incluye validación de campos y envío de mensajes.</li>
+            <li><strong>Notificaciones:</strong> Sistema de notificaciones para informar al usuario sobre sus acciones.</li>
+            <li><strong>Diseño Responsive:</strong> Se adapta a diferentes dispositivos y tamaños de pantalla.</li>
+          </ul>
+        </div>
+
+        <div class="project-tech">
+          <h2>Tecnologías Utilizadas</h2>
+          <ul>
+            <li><strong>HTML5:</strong> Para la estructura semántica del sitio.</li>
+            <li><strong>CSS3:</strong> Para el diseño, animaciones y responsive design.</li>
+            <li><strong>JavaScript:</strong> Para la interactividad, gestión del carrito y validación de formularios.</li>
+            <li><strong>LocalStorage:</strong> Para persistencia de datos del carrito entre sesiones.</li>
+            <li><strong>SVG:</strong> Imágenes vectoriales para los gráficos del sitio.</li>
+          </ul>
+        </div>
+
+        <div class="project-challenges">
+          <h2>Desafíos y Soluciones</h2>
+          <p>
+            Uno de los principales desafíos fue implementar un carrito de compras funcional sin utilizar un backend. La solución fue utilizar JavaScript para gestionar el estado del carrito en el cliente y LocalStorage para mantener la persistencia entre sesiones.
+          </p>
+          <p>
+            Otro desafío fue crear un diseño responsive que funcionara bien en todos los dispositivos. Utilicé media queries y un enfoque mobile-first para asegurar que la experiencia de usuario fuera óptima en cualquier tamaño de pantalla.
+          </p>
+        </div>
+
+        <div class="project-links">
+          <h2>Enlaces del Proyecto</h2>
+          <div class="links-container">
+            <a href="/ecommerce/index.html" class="btn primary" target="_blank">Ver Demo</a>
+            <a href="https://github.com/tuusuario/ecommerce" class="btn secondary" target="_blank">Ver Código</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="back-to-projects">
+      <div class="container">
+        <a href="/projects" class="btn secondary">← Volver a Proyectos</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .project-hero {
+    background-color: #1e293b;
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .project-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .project-details {
+    padding: 4rem 0;
+  }
+
+  .project-overview,
+  .project-features,
+  .project-tech,
+  .project-challenges,
+  .project-links {
+    margin-bottom: 3rem;
+  }
+
+  .project-details h2 {
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+  }
+
+  .project-details p {
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-details ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-details li {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .project-preview {
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .preview-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+  }
+
+  .links-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+
+  .primary:hover {
+    background-color: #2563eb;
+  }
+
+  .secondary {
+    background-color: transparent;
+    color: #1e293b;
+    border: 2px solid #1e293b;
+  }
+
+  .secondary:hover {
+    background-color: rgba(30, 41, 59, 0.1);
+  }
+
+  .back-to-projects {
+    padding: 2rem 0 4rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .project-hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+    }
+
+    .links-container {
+      flex-direction: column;
+    }
+  }
+</style>
